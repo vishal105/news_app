@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/domain/entities/news.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:news_app/core/services/firebase_analytics_service.dart';
 import 'package:news_app/di/injector.dart';
+import 'package:news_app/domain/entities/news.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Page to display the details of a news article.
 class NewsDetailPage extends StatelessWidget {
@@ -38,7 +38,10 @@ class NewsDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildImage(context, news.urlToImage, double.infinity, 250),
+            Hero(
+              tag: news.urlToImage, // Use the same tag as in NewsItem
+              child: _buildImage(context, news.urlToImage, double.infinity, 250),
+            ),
             SizedBox(height: 16.0),
             Text(
               news.title,
@@ -71,7 +74,10 @@ class NewsDetailPage extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildImage(context, news.urlToImage, width / 2 - 40, 400),
+            Hero(
+              tag: news.urlToImage, // Use the same tag as in NewsItem
+              child: _buildImage(context, news.urlToImage, width / 2 - 40, 400),
+            ),
             SizedBox(width: 32.0),
             Expanded(
               child: Column(
